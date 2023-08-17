@@ -9,7 +9,6 @@ exports.signUp = async (req, res) => {
     return res.status(400).send("No se encontraron archivos");
   }
   const foto = req.files.foto;
-
   
   const result = await service.signUp(nombre, password, anosExperiencia, especialidad, foto, email);
 

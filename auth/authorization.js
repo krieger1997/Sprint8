@@ -22,7 +22,9 @@ module.exports = (req, res, next) => {
 
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: 'An error has occurred' });
+    return res.status(500).render('home',{
+        signIn:true
+    })
   }
 
 }

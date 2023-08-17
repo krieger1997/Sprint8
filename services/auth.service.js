@@ -40,7 +40,7 @@ exports.signUp = async (nombre, password, anosExperiencia, especialidad, foto, e
           message: error.message || 'Some error ocurred while creating skater (file error).',
         });
       }
-      skater.foto = _path;
+      skater.foto = `/images/${skater.skaterId}${extensionName}`;
       skater.save();
 
     });
@@ -77,7 +77,8 @@ exports.singIn = async (nombre, password) => {
         message: 'wrong password',
       });
     }
-    const payload = { user: { id: foundSkater.id } };
+    console.log("SKATER ID: ",foundSkater.skaterId)
+    const payload = { user: { id: foundSkater.skaterId } };
     const token = jwt.sign(
       payload,
       process.env.SECRET,

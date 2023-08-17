@@ -39,7 +39,7 @@ app.get('/',(req,res)=>{
         signIn:true
     })
 })
-
+app.locals.json = obj => JSON.stringify(obj, null, 2);
 
 app.get('/signUp',(req,res)=>{
     res.render('home',{

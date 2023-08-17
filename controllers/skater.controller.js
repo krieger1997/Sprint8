@@ -2,11 +2,19 @@ const service = require("../services/skater.service");
 
 exports.findAll = async (req, res) => {
   const result = await service.findAll();
-
   if (result.code !== undefined) {
     res.status(result.code).json({ message: result.message });
   }
-  res.status(200).json(result.filter(skater=>skater.skaterId!=1));
+  // const skaters = result.filter(skater=>skater.skaterId!=1);
+  const skaters = result;
+
+  console.log("SKATERS:", skaters)
+
+
+  res.render('list', {
+    skaters: skaters
+  })
+
 };
 
 exports.findOne = async (req, res) => {
@@ -14,12 +22,12 @@ exports.findOne = async (req, res) => {
     res.status(400).json({ message: 'Content can`t be empty' });
   }
   const id = req.params.id;
-  if(id!=1){
-      const result = await service.findOne(id);
-      if (!result) {
-        return res.status(404).send({ message: "Skater not found" });
-      }
-  }else{
+  if (id != 1) {
+    const result = await service.findOne(id);
+    if (!result) {
+      return res.status(404).send({ message: "Skater not found" });
+    }
+  } else {
     return res.status(404).send({ message: "Skater not found" });
   }
   if (result?.code !== undefined) {
